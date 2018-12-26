@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         final Api api = retrofit.create(Api.class);
-      /*  Call<Category> call = api.getHeroes();
+        Call<Category> call = api.getHeroes();
 
         call.enqueue(new Callback<Category>() {
             @Override
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             responseText.setText(t.getMessage());
             }
-        });*/
+        });
         Call<ResponseBody> bodyCall=api.getOneCategory("12");
 
         bodyCall.enqueue(new Callback<ResponseBody>() {
