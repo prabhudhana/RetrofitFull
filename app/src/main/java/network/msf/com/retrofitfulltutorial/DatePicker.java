@@ -47,7 +47,7 @@ public class DatePicker extends AppCompatActivity {
 
                 //calendar.add(Calendar.DAY_OF_MONTH, -7);
                // Date result = calendar.getTime();
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()+604800000);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()+604800000-86400000);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 //Disable past days
                 //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
