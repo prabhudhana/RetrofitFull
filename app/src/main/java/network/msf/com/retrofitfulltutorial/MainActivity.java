@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         final Api api = retrofit.create(Api.class);
         Call<Category> call = api.getHeroes();
 
-        call.enqueue(new Callback<Category>() {
+        /*call.enqueue(new Callback<Category>() {
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
                 // responseText.setText(response.body().string());
@@ -99,6 +99,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 responseText.setText(t.getMessage());
+            }
+        });
+*/
+        Call<ResponseBody> postCall = api.userLogin("test","hjaghgdf@gmail.com","4656446544","15455454","123456");
+
+        postCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    responseText.setText(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                responseText.setText(t.getMessage());
+
             }
         });
 
