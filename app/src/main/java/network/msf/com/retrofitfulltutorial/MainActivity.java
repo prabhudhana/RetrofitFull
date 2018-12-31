@@ -8,6 +8,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -102,14 +105,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
-        Call<ResponseBody> postCall = api.userLogin("test","hjaghgdf@gmail.com","4656446544","15455454","123456");
+        Call<ResponseBody> postCall = api.userLogin("test",
+                "hjaghgdf@gmail.com",
+                "254554",
+                "15455454",
+                "123456");
 
         postCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    responseText.setText(response.body().string());
+                    if (response.isSuccessful()){
+                        responseText.setText(response.body().string());
+                        JSONObject jsonObject=new JSONObject(response.body().string());
+                        responseText.setText(jsonObject.getInt("status"));
+
+                    }else{
+                        //responseText.setText(response.errorBody().string());
+                        JSONObject jsonObject=new JSONObject(response.errorBody().string());
+                        responseText.setText(String.valueOf(jsonObject.getInt("status")));
+
+                    }
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
