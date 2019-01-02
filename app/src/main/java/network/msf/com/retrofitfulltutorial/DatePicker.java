@@ -92,6 +92,7 @@ public class DatePicker extends AppCompatActivity {
                             hour_of_12_hour_format = selectedHour;
                         }
 
+
                         editText.setText( hour_of_12_hour_format + ":" + selectedMinute+" "+status);
                     }
                 }, hour, minute, false);//Yes 12 hour time
