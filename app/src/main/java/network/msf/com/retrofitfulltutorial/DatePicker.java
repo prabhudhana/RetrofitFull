@@ -19,6 +19,7 @@ public class DatePicker extends AppCompatActivity {
 
     EditText editText;
     Calendar calendar;
+    String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +68,31 @@ public class DatePicker extends AppCompatActivity {
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
+
                 mTimePicker = new TimePickerDialog(DatePicker.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        if(selectedHour>11){
+                            //editText.setText( selectedHour + ":" + selectedMinute+" "+"PM");
+                            status="PM";
 
+                        }else{
+                            status="AM";
 
-                        editText.setText( selectedHour + ":" + selectedMinute);
+                        }
+                        int hour_of_12_hour_format;
+
+                        if(selectedHour > 11){
+
+                            // If the hour is greater than or equal to 12
+                            // Then we subtract 12 from the hour to make it 12 hour format time
+                            hour_of_12_hour_format = selectedHour - 12;
+                        }
+                        else {
+                            hour_of_12_hour_format = selectedHour;
+                        }
+
+                        editText.setText( hour_of_12_hour_format + ":" + selectedMinute+" "+status);
                     }
                 }, hour, minute, false);//Yes 12 hour time
                 mTimePicker.setTitle("Select Time");
