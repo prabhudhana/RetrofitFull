@@ -1,12 +1,14 @@
 package network.msf.com.retrofitfulltutorial;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +33,7 @@ public class DatePicker extends AppCompatActivity {
                 calendar.set(Calendar.YEAR, i);
                 calendar.set(Calendar.MONTH, i1);
                 calendar.set(Calendar.DAY_OF_MONTH, i2);
-                updateLabel();
+                //updateLabel();
             }
 
 
@@ -41,7 +43,7 @@ public class DatePicker extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(DatePicker.this, onDateSetListener, calendar
+                /*DatePickerDialog datePickerDialog = new DatePickerDialog(DatePicker.this, onDateSetListener, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
 
@@ -53,19 +55,39 @@ public class DatePicker extends AppCompatActivity {
                 //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
                 datePickerDialog.show();
-                /*new DatePickerDialog(DatePicker.this, onDateSetListener, calendar
+                *//*new DatePickerDialog(DatePicker.this, onDateSetListener, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();*/
+
+
+
+                //TimePicker
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(DatePicker.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+
+                        editText.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, false);//Yes 12 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
             }
         });
 
 
     }
 
-    private void updateLabel() {
+   /* private void updateLabel() {
         String myFormat = "dd/MM/YY"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editText.setText(sdf.format(calendar.getTime()));
-    }
+    }*/
 }
